@@ -48,7 +48,7 @@ function addEmployee() {
         } else if (response.employeeClass === "Intern") {
             internInfo();
         } else {
-            console.log(employees);
+            buildTeam();
         }
     })
 }
@@ -109,5 +109,66 @@ function internInfo() {
         addEmployee();
     })
 };
+
+function buildTeam() {
+    let htmlArray = [];
+    let htmlStart = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Team Profile</title>
+</head>
+<body>
+    <header>
+        <h1>Team Profile</h1>
+    </header>
+    <div class="employeeCards">
+    `
+    htmlArray.push(htmlStart);
+
+    for (let i = 0; i < employees.length; i++) {
+        let card = `
+        <div class="card">
+            <div class="cardTop">
+                <h2>${employees[i].name}</h2>
+                <h2>${employees[i].title}</h2>
+            </div>
+            <div class="cardBottom">
+                <p>Employee ID: ${employees[i].id}</p>
+                <p>Email: <a href="mailto:${employees[i].email}">${employees[i].email}</a>></p>
+        `
+        if (employees[i].officeNumber) {
+            card += `
+            <p>Office Number: ${employees[i].officeNumber}</p>
+            `
+        } else if (employees[i].github) {
+            card += `
+            <p>GitHub: <a href="https://github.com/${employees[i].github}">${employees[i].github}</a></p>
+            `
+        } else if (employees[i].school) {
+            card += `
+            <p>School: ${employees[i].school}</p>
+            `
+        }
+        card += `
+        </div>
+        </div>
+        `
+        htmlArray.push(card);
+    }
+
+    let htmlEnd = `
+    </div>
+    </body>
+    </html>
+    `
+    htmlArray.push(htmlEnd);
+
+    fs.writeFile(`./dist/team profile.html`, htmlArray.join(""), (err) =>
+    err ? console.error(err) : console.log('Team Profile generated'))
+}
 
 managerInfo();
