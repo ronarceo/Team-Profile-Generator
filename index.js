@@ -119,6 +119,8 @@ function buildTeam() {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>Team Profile</title>
 </head>
 <body>
@@ -132,29 +134,31 @@ function buildTeam() {
     for (let i = 0; i < employees.length; i++) {
         let card = `
         <div class="card">
-            <div class="cardTop">
-                <h2>${employees[i].name}</h2>
-                <h2>${employees[i].title}</h2>
+            <div class="card-header">
+                <h2 class ="card-title">${employees[i].name}</h2>
+                <h2 class ="card-subtitle">${employees[i].title}</h2>
             </div>
-            <div class="cardBottom">
-                <p>Employee ID: ${employees[i].id}</p>
-                <p>Email: <a href="mailto:${employees[i].email}">${employees[i].email}</a>></p>
+            <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Employee ID: ${employees[i].id}</li>
+                <li class="list-group-item">Email: <a href="mailto:${employees[i].email}">${employees[i].email}</a></li>
         `
         if (employees[i].officeNumber) {
             card += `
-            <p>Office Number: ${employees[i].officeNumber}</p>
+                <li class="list-group-item">Office Number: ${employees[i].officeNumber}</li>
             `
         } else if (employees[i].github) {
             card += `
-            <p>GitHub: <a href="https://github.com/${employees[i].github}">${employees[i].github}</a></p>
+                <li class="list-group-item">GitHub: <a href="https://github.com/${employees[i].github}">${employees[i].github}</a></li>
             `
         } else if (employees[i].school) {
             card += `
-            <p>School: ${employees[i].school}</p>
+                <li class="list-group-item">School: ${employees[i].school}</li>
             `
         }
         card += `
-        </div>
+            </ul>
+            </div>
         </div>
         `
         htmlArray.push(card);
@@ -162,8 +166,8 @@ function buildTeam() {
 
     let htmlEnd = `
     </div>
-    </body>
-    </html>
+</body>
+</html>
     `
     htmlArray.push(htmlEnd);
 
