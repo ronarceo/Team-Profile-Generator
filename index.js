@@ -149,7 +149,7 @@ function buildTeam() {
             `
         } else if (employees[i].github) {
             card += `
-                <li class="list-group-item">GitHub: <a href="https://github.com/${employees[i].github}">${employees[i].github}</a></li>
+                <li class="list-group-item">GitHub: <a href="https://github.com/${employees[i].github}" target="_blank">${employees[i].github}</a></li>
             `
         } else if (employees[i].school) {
             card += `
